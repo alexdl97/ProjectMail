@@ -16,8 +16,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Junior Guzman
  */
-public class DTipoProducto {
-
+public class DTipoEntrega {
+    
     private int id;
     private String descripcion;
     private Conexion conexion;
@@ -50,29 +50,29 @@ public class DTipoProducto {
         this.descripcion = descripcion;
     }
 
-    public DTipoProducto() {
+    public DTipoEntrega() {
         id = 0;
         descripcion = "";
         conexion = Conexion.getInstancia();
     }
 
-    public DTipoProducto(String descripcion) {
+    public DTipoEntrega(String descripcion) {
         this.id = 0;
         this.descripcion = descripcion;
         conexion = Conexion.getInstancia();
     }
 
-    public DTipoProducto(int id, String decripcion) {
+    public DTipoEntrega(int id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
         conexion = Conexion.getInstancia();
     }
     
-     public DefaultTableModel getTipoProducto() {
+     public DefaultTableModel getTipoEntrega() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel proveedores = new DefaultTableModel();
-        String sql = "SELECT * FROM TipoProducto";
+        String sql = "SELECT * FROM TipoEntrega";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -99,7 +99,7 @@ public class DTipoProducto {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO TipoProducto(descripcion) " +
+        String sql = "INSERT INTO TipoEntrega(descripcion) " +
                       "VALUES(?)";
         try {
             // La ejecuto
@@ -125,12 +125,12 @@ public class DTipoProducto {
         return 0;
     }
     
-    public DefaultTableModel getTipoProductos() {
+    public DefaultTableModel getTipoEntregas() {
         
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
-        DefaultTableModel tipoProducto = new DefaultTableModel();
-        String sql = "SELECT * FROM TipoProducto WHERE TipoProducto.id = ? LIMIT 1";
+        DefaultTableModel tipoEntrega = new DefaultTableModel();
+        String sql = "SELECT * FROM TipoEntrega WHERE TipoEntrega.id = ? LIMIT 1";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -142,7 +142,7 @@ public class DTipoProducto {
              while (result.next()) {
                 // Agrego las tuplas a mi tabla
                  System.out.println("Descripcion --> " + result.getString("descripcion"));
-                tipoProducto.addRow(new Object[] {
+                tipoEntrega.addRow(new Object[] {
                     result.getInt("id"),
                     result.getString("descripcion"),
                 });
@@ -156,14 +156,14 @@ public class DTipoProducto {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return tipoProducto;
+        return tipoEntrega;
     }
     
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "UPDATE TipoProducto SET descripcion = ? WHERE TipoProducto.id = ?";
+        String sql = "UPDATE TipoEntrega SET descripcion = ? WHERE TipoEntrega.id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -193,7 +193,7 @@ public class DTipoProducto {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "DELETE FROM TipoProducto WHERE TipoProducto.id = ?";
+        String sql = "DELETE FROM TipoEntrega WHERE TipoEntrega.id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
