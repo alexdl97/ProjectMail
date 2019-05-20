@@ -5,8 +5,15 @@
  */
 package projectmail;
 
+import Datos.DAdministrativo;
+import Datos.DCliente;
+import Datos.DProveedor;
+import Datos.DUsuario;
 import Protocolos.POP;
 import Protocolos.SMTP;
+import java.sql.Date;
+import java.util.LinkedList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,8 +28,9 @@ public class ProjectMail {
         // TODO code application logic here
         
         //POP.readMail();
-        SMTP.sendMail("alexdl97@hotmail.com", "ADL", "CONTENT-ADL");
-
+        DProveedor user = new DProveedor(1, "111", "prov", "123123", "av beni", "A");
+        user.eliminar();
+       
     }
     
 }
