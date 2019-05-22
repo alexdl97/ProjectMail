@@ -9,11 +9,14 @@ import Datos.DAdministrativo;
 import Datos.DCliente;
 import Datos.DProveedor;
 import Datos.DUsuario;
+import Negocio.NCliente;
+import Protocolos.MimeMail;
 import Protocolos.POP;
 import Protocolos.SMTP;
 import java.sql.Date;
 import java.util.LinkedList;
 import javax.swing.table.DefaultTableModel;
+import utils.Tools;
 
 /**
  *
@@ -30,8 +33,11 @@ public class ProjectMail {
         //POP.readMail();
         //DProveedor user = new DProveedor(1, "111", "prov", "123123", "av beni", "A");
         //user.eliminar();
-        SMTP.sendMail("alexdl97@hotmail.com", "PARA ALEX", "CONTENIDO DE ALEX");
-       
+        //SMTP.sendMail("alexdl97@hotmail.com", "PARA ALEX", "CONTENIDO DE ALEX");
+       NCliente cli = new NCliente();
+       DefaultTableModel data = cli.getClientes();
+       System.out.println("CANTIDAD " + data.getRowCount());
+        System.out.println(Tools.dibujarDatos(data));
     }
     
 }

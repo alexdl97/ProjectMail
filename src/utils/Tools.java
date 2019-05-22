@@ -277,4 +277,24 @@ public class Tools {
 
         return tableString;
     }
+     
+        public static String dibujarDatos(DefaultTableModel data) {
+         System.out.println("COUNT " + data.getRowCount());
+         System.out.println("COLUM " + data.getColumnCount());
+        String result = ""; 
+        for (int i = 0; i < data.getColumnCount(); i++) {
+            System.out.println("COLUM NAME --> " + data.getColumnName(i));
+            result += data.getColumnName(i) + "  ";
+        }
+        result += "\n";
+        for (int i = 0; i < data.getRowCount(); i++) {
+            for (int j = 0; j < data.getColumnCount(); j++) {
+                System.out.println("ELEM -- >" + data.getValueAt(i, j));
+                result += String.valueOf(data.getValueAt(i, j)) + "    ";
+            }
+            result += "\n";
+        }
+        result += "\n";
+        return result;
+     }
 }

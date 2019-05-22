@@ -36,23 +36,23 @@ public class DCliente {
         conexion = Conexion.getInstancia();
     }
     
-    public DCliente(int id, String codigo, int nit, String nombre, String telefono, String estado) {
+    public DCliente(int id, String codigo, int nit, String nombre, String telefono) {
         this.id = id;
         this.codigo = codigo;
         this.nit = nit;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.estado = estado;
+        this.estado = "A";
         conexion = Conexion.getInstancia();
     }
     
-    public DCliente(String codigo, int nit, String nombre, String telefono, String estado) {
+    public DCliente(String codigo, int nit, String nombre, String telefono) {
         this.id = 0;
         this.codigo = codigo;
         this.nit = nit;
         this.nombre = nombre;
         this.telefono = telefono;
-        this.estado = estado;
+        this.estado = "A";
         conexion = Conexion.getInstancia();
     }
 
@@ -108,6 +108,9 @@ public class DCliente {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel clientes = new DefaultTableModel();
+        clientes.setColumnIdentifiers(new Object[]{
+            "id", "codigo","nit", "nombre", "telefono", "estado"
+        });
         String sql = "SELECT * FROM cliente WHERE estado = 'A'";
         try {
             // La ejecuto
@@ -117,6 +120,7 @@ public class DCliente {
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 // Agrego las tuplas a mi tabla
+                System.out.println(" RESULT ---> " + result.getString("nombre"));
                 clientes.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
@@ -168,6 +172,33 @@ public class DCliente {
             System.out.println(ex.getMessage());
         }
         return 0;
+    }
+    
+    public int getIdCliente() {
+        this.conexion.abrirConexion();
+        Connection con = this.conexion.getConexion();
+        String sql = "SELECT * FROM cliente WHERE estado = 'A' AND cliente.codigo = ? LIMIT 1";
+        try {
+            // La ejecuto
+            PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            // El segundo parametro de usa cuando se tienen tablas que generan llaves primarias
+            // es bueno cuando nuestra bd tiene las primarias autoincrementables
+            stmt.setString(1, this.codigo);
+            ResultSet result = stmt.executeQuery();
+            id = 0;
+             while (result.next()) {
+                id = result.getInt("id");
+            }
+             
+            // Cierro Conexion
+            this.conexion.cerrarConexion();
+
+            // Obtengo el id generado pra devolverlo
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return id;
     }
     
     public DefaultTableModel getCliente() {

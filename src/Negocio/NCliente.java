@@ -24,7 +24,7 @@ public class NCliente {
     }
     
     public int registrar(String codigo, int nit, String nombre, String telefono) {
-        cliente = new DCliente(codigo, nit, nombre,telefono, "A");
+        cliente = new DCliente(codigo, nit, nombre,telefono);
         return cliente.registrar();
     }
     
@@ -33,13 +33,16 @@ public class NCliente {
         return cliente.getCliente();
     }
     
-    public int modificar(int id, String codigo, int nit, String nombre, String telefono, String estado) {
-        cliente = new DCliente(id, codigo, nit, nombre,telefono, estado);
+    public int modificar(String codigo, int nit, String nombre, String telefono) {
+        cliente.setCodigo(codigo);
+        int id = cliente.getIdCliente();
+        cliente = new DCliente(id, codigo, nit, nombre,telefono);
         return cliente.modificar();
     }
     
-    public int eliminar(int id) {
-        cliente.setId(id);
+    public int eliminar(String codigo) {
+        cliente.setCodigo(codigo);
+        cliente.getIdCliente();
         return cliente.eliminar();
     }
 }

@@ -58,9 +58,18 @@ public class Impresol {
         }
         
         switch (token.getAtributo()) {
-            case Token.OBTENERCLIENTES:
-                mostrarClientes(analex, destinatario);
+            case Token.OBTENERCLIENTES :
+                obtenerClientes(analex, destinatario);
                 System.out.println("OBTENER CLIENTES");
+                break;
+            case Token.REGISTRARCLIENTE :
+                registrarCliente(analex, destinatario);
+                break;
+            case Token.MODIFICARCLIENTE :
+                modificarCliente(analex, destinatario);
+                break;
+            case Token.ELIMINARCLIENTE :
+                eliminarCliente(analex, destinatario);
                 break;
         }
         
@@ -86,7 +95,7 @@ public class Impresol {
 //        }   
     }
     
-    private void mostrarClientes(Analex analex, String correoDest) {
+    private void obtenerClientes(Analex analex, String correoDest) {
        // Obtengo el Siguiente token
         analex.Avanzar();
         Token token = analex.Preanalisis();
@@ -95,7 +104,7 @@ public class Impresol {
         if (token.getNombre() == Token.HELP) {
             // Mostrar ayuda de esa funcionalidad
             // Enviar correo con la ayuda
-            //SMTP.sendMail(correoDest, Constantes.MsgAyuda, Comandos_Ayuda.AYUDA_MOSTRARCLIENTES);
+            //SMTP.sendMail(correoDest, Constantes.MsgAyuda, Constantes.AYUDA_MOSTRARCLIENTES);
             return;
         }
         // Sino, ejecutar el comando
@@ -105,7 +114,7 @@ public class Impresol {
         try {
             MimeMail mimemailer = new MimeMail();
             //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
-            SMTP.sendMail(correoDest,"OBTENERCLIENTES", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));
+            SMTP.sendMail(correoDest,"OBTENERCLIENTES", "Lista de Clientes\n" + Tools.dibujarDatos(cliente.getClientes()));
         } catch (Exception e) {
             SMTP.sendMail(correoDest, "Mostrar Clientes", "error durante la obtencion de la tabla, verifique con el comando HELP");
 
@@ -114,4 +123,141 @@ public class Impresol {
       //  String mensaje = Herramientas.dibujarTabla(clienteNegocio.mostrarClientes());        
       //  clienteSMTP.sendMail(correoDest, "Mostrar Clientes\n\n", mensaje);   
     }
+    
+    private void registrarCliente(Analex analex, String correoDest) {
+        // Obtengo el Siguiente token
+        analex.Avanzar();
+        Token token = analex.Preanalisis();
+
+        // Reviso si no es ayuda
+        if (token.getNombre() == Token.HELP) {
+            // Mostrar ayuda de esa funcionalidad
+            // Enviar correo con la ayuda
+            //clienteNegocio clienteNegocio = new clienteNegocio();
+            //String mensaje = Herramientas.dibujarTabla(clienteNegocio.mostrarClientes());
+            //SMTP.sendMail(correoDest, Constante.msgAyudaPropietario+"\n\n",Comandos_Ayuda.AYUDA_REGISTRARCLIENTE);
+            return;
+        }
+        try {
+        // Sino, ejecutar el comando
+        NCliente cliente = new NCliente();
+        analex.Avanzar();
+        // Atributos      
+        String codigo = Tools.quitarComillas(analex.Preanalisis().getToStr());
+        analex.Avanzar();
+        analex.Avanzar();
+        int nit = analex.Preanalisis().getAtributo();
+        analex.Avanzar();
+        analex.Avanzar();
+        String nombre = Tools.quitarComillas(analex.Preanalisis().getToStr());
+        analex.Avanzar();
+        analex.Avanzar();
+        String telefono = Tools.quitarComillas(analex.Preanalisis().getToStr());
+
+        
+
+            cliente.registrar(codigo, nit, nombre, telefono);
+            //Creamos un usuario para cada cliente al momento de crear al cliente
+            //Usuario u= new Usuario();
+            //u.setUsuario(correoDest, nombre,"Cliente");
+            //Verificamos si existe el usuario
+            /*if(! (u.existeUsuario(correoDest))){
+             u.registrarUsuario();
+            }*/
+            //mimeMail mimemailer = new mimeMail();            
+            //mimemailer.sendHtmlEmail(correoDest, "Registrar Cliente", Constante.IngresoPositivoR+"\n\n"+ Herramientas.dibujarTablawithHTMLwithoutOpciones(clienteNegocio.mostrarClientes()));                   
+            //}     
+            System.out.println("SUPUESTAMENTE GUARDO");
+        } catch (Exception e) {
+            //SMTP.sendMail(correoDest, "Registrar Cliente", Constantes.IngresoErrorR+"\n"+"Mensaje enviado: "+ analex.M.texto);
+            SMTP.sendMail(correoDest, "Registrar Cliente", "ERROR XD"+"\n"+"Mensaje enviado: "+ analex.M.texto);
+
+        }
+    }
+    
+    private void modificarCliente(Analex analex, String correoDest) {
+        // Obtengo el Siguiente token
+        analex.Avanzar();
+        Token token = analex.Preanalisis();
+
+        // Reviso si no es ayuda
+        if (token.getNombre() == Token.HELP) {
+            // Mostrar ayuda de esa funcionalidad
+            // Enviar correo con la ayuda
+            //clienteNegocio clienteNegocio = new clienteNegocio();
+            //String mensaje = Herramientas.dibujarTabla(clienteNegocio.mostrarClientes());
+            //SMTP.sendMail(correoDest, Constante.msgAyudaPropietario+"\n\n",Comandos_Ayuda.AYUDA_REGISTRARCLIENTE);
+            return;
+        }
+        try {
+        // Sino, ejecutar el comando
+        NCliente cliente = new NCliente();
+        analex.Avanzar();
+        // Atributos      
+        String codigo = Tools.quitarComillas(analex.Preanalisis().getToStr());
+        analex.Avanzar();
+        analex.Avanzar();
+        int nit = analex.Preanalisis().getAtributo();
+        analex.Avanzar();
+        analex.Avanzar();
+        String nombre = Tools.quitarComillas(analex.Preanalisis().getToStr());
+        analex.Avanzar();
+        analex.Avanzar();
+        String telefono = Tools.quitarComillas(analex.Preanalisis().getToStr());
+
+        
+
+            cliente.modificar(codigo, nit, nombre, telefono);
+            //Creamos un usuario para cada cliente al momento de crear al cliente
+            //Usuario u= new Usuario();
+            //u.setUsuario(correoDest, nombre,"Cliente");
+            //Verificamos si existe el usuario
+            /*if(! (u.existeUsuario(correoDest))){
+             u.registrarUsuario();
+            }*/
+            //mimeMail mimemailer = new mimeMail();            
+            //mimemailer.sendHtmlEmail(correoDest, "Registrar Cliente", Constante.IngresoPositivoR+"\n\n"+ Herramientas.dibujarTablawithHTMLwithoutOpciones(clienteNegocio.mostrarClientes()));                   
+            //}     
+            System.out.println("SUPUESTAMENTE GUARDO");
+        } catch (Exception e) {
+            //SMTP.sendMail(correoDest, "Registrar Cliente", Constantes.IngresoErrorR+"\n"+"Mensaje enviado: "+ analex.M.texto);
+            SMTP.sendMail(correoDest, "Registrar Cliente", "ERROR XD"+"\n"+"Mensaje enviado: "+ analex.M.texto);
+
+        }
+    }
+    
+    private void eliminarCliente(Analex analex, String correoDest) {
+       // Obtengo el Siguiente token
+        analex.Avanzar();
+        Token token = analex.Preanalisis();
+
+        // Reviso si no es ayuda
+        if (token.getNombre() == Token.HELP) {
+            // Mostrar ayuda de esa funcionalidad
+            // Enviar correo con la ayuda
+            //SMTP.sendMail(correoDest, Constantes.MsgAyuda, Constantes.AYUDA_MOSTRARCLIENTES);
+            return;
+        }
+        
+        try {
+            // Sino, ejecutar el comando
+            NCliente cliente = new NCliente();  
+            analex.Avanzar();
+            // Atributos      
+            String codigo = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            analex.Avanzar();
+            cliente.eliminar(codigo);
+            System.out.println("ELIMINO");
+            //MimeMail mimemailer = new MimeMail();
+            //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
+            //SMTP.sendMail(correoDest,"OBTENERCLIENTES", "Lista de Clientes\n" + Tools.dibujarDatos(cliente.getClientes()));
+        } catch (Exception e) {
+            SMTP.sendMail(correoDest, "Mostrar Clientes", "error durante la obtencion de la tabla, verifique con el comando HELP");
+
+        }
+
+      //  String mensaje = Herramientas.dibujarTabla(clienteNegocio.mostrarClientes());        
+      //  clienteSMTP.sendMail(correoDest, "Mostrar Clientes\n\n", mensaje);   
+    }
+    
 }
