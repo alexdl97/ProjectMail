@@ -28,8 +28,9 @@ public class ProjectMail {
         // TODO code application logic here
         
         //POP.readMail();
-        DProveedor user = new DProveedor(1, "111", "prov", "123123", "av beni", "A");
-        user.eliminar();
+        //DProveedor user = new DProveedor(1, "111", "prov", "123123", "av beni", "A");
+        //user.eliminar();
+        SMTP.sendMail("alexdl97@hotmail.com", "PARA ALEX", "CONTENIDO DE ALEX");
        
     }
     
