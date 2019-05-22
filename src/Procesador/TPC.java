@@ -23,7 +23,7 @@ public class TPC {
             "MODIFICARCLIENTE",
             "ELIMINARCLIENTE",
             "OBTENERCLIENTE",
-            "MOSTRARCLIENTES",
+            "OBTENERCLIENTES",
 
             "REGISTRARMASCOTA",
             "MODIFICARMASCOTA",
@@ -97,7 +97,7 @@ public class TPC {
             new Token(Token.FUNC, Token.MODIFICARCLIENTE, "MODIFICARCLIENTE"),
             new Token(Token.FUNC, Token.ELIMINARCLIENTE, "ELIMINARCLIENTE"),
             new Token(Token.FUNC, Token.OBTENERCLIENTE, "OBTENERCLIENTE"),
-            new Token(Token.FUNC, Token.MOSTRARCLIENTES, "MOSTRARCLIENTES")
+            new Token(Token.FUNC, Token.OBTENERCLIENTES, "OBTENERCLIENTES")
 
     ));
 

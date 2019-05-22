@@ -30,7 +30,7 @@ public class Token {
     public static final int MODIFICARCLIENTE = 101;
     public static final int ELIMINARCLIENTE = 102;
     public static final int OBTENERCLIENTE = 103;
-    public static final int MOSTRARCLIENTES = 104;
+    public static final int OBTENERCLIENTES = 104;
     
      //public static final int M = 150;   
      

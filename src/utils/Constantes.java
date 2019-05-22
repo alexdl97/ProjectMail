@@ -24,4 +24,6 @@ public class Constantes {
     public static final String DB_USER = "alex";
     public static final String DB_PASSWORD = "alex123456";
     public static final String DB_NAME = "db_impresol";
+    
+    public static final String MsgAyuda = "Comandos de Ayuda ";
 }

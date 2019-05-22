@@ -5,11 +5,14 @@
  */
 package Principal;
 
+import Negocio.NCliente;
 import Procesador.Analex;
 import Procesador.Cinta;
 import Procesador.Parser;
 import Procesador.Token;
+import Protocolos.MimeMail;
 import Protocolos.SMTP;
+import utils.Constantes;
 import utils.Tools;
 
 /**
@@ -21,7 +24,7 @@ public class Impresol {
         String destinatario = Tools.getDestinatario(Mensaje);        
         System.out.println("Destinatario: " + destinatario);
         String content = Tools.getSubjectOrden(Mensaje);
-        System.out.println("Class SistemaVeterinaria:ProcesarMensaje:Contenido " + content);
+        System.out.println("ProcesarMensaje:Contenido " + content);
         
         //Usuario user = new Usuario();
         //Verificamos si el usuario esta registrado en el sistema
@@ -54,6 +57,13 @@ public class Impresol {
             return;
         }
         
+        switch (token.getAtributo()) {
+            case Token.OBTENERCLIENTES:
+                mostrarClientes(analex, destinatario);
+                System.out.println("OBTENER CLIENTES");
+                break;
+        }
+        
         //Para registrar a un usuario
 //        if(token.getAtributo()== Token.REGISTRARME)
 //        {
@@ -74,5 +84,34 @@ public class Impresol {
 //        } else{
 //           //clienteSMTP.sendMail(destinatario, "No se encuentra registrado!", "El sistema no puede atender sus peticiones dado que no se encuentra registrado, favor comuniquese con el administrador, Gracias... :)");   
 //        }   
+    }
+    
+    private void mostrarClientes(Analex analex, String correoDest) {
+       // Obtengo el Siguiente token
+        analex.Avanzar();
+        Token token = analex.Preanalisis();
+
+        // Reviso si no es ayuda
+        if (token.getNombre() == Token.HELP) {
+            // Mostrar ayuda de esa funcionalidad
+            // Enviar correo con la ayuda
+            //SMTP.sendMail(correoDest, Constantes.MsgAyuda, Comandos_Ayuda.AYUDA_MOSTRARCLIENTES);
+            return;
+        }
+        // Sino, ejecutar el comando
+        NCliente cliente = new NCliente();   
+        
+        
+        try {
+            MimeMail mimemailer = new MimeMail();
+            //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
+            SMTP.sendMail(correoDest,"OBTENERCLIENTES", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));
+        } catch (Exception e) {
+            SMTP.sendMail(correoDest, "Mostrar Clientes", "error durante la obtencion de la tabla, verifique con el comando HELP");
+
+        }
+
+      //  String mensaje = Herramientas.dibujarTabla(clienteNegocio.mostrarClientes());        
+      //  clienteSMTP.sendMail(correoDest, "Mostrar Clientes\n\n", mensaje);   
     }
 }
