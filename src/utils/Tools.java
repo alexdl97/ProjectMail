@@ -279,8 +279,8 @@ public class Tools {
     }
      
         public static String dibujarDatos(DefaultTableModel data) {
-         System.out.println("COUNT " + data.getRowCount());
-         System.out.println("COLUM " + data.getColumnCount());
+         //System.out.println("COUNT " + data.getRowCount());
+         //System.out.println("COLUM " + data.getColumnCount());
         String result = ""; 
         for (int i = 0; i < data.getColumnCount(); i++) {
             System.out.println("COLUM NAME --> " + data.getColumnName(i));
@@ -289,12 +289,14 @@ public class Tools {
         result += "\n";
         for (int i = 0; i < data.getRowCount(); i++) {
             for (int j = 0; j < data.getColumnCount(); j++) {
-                System.out.println("ELEM -- >" + data.getValueAt(i, j));
+                //System.out.println("ELEM -- >" + data.getValueAt(i, j));
                 result += String.valueOf(data.getValueAt(i, j)) + "    ";
             }
             result += "\n";
         }
         result += "\n";
+        System.out.println("TABLA -----");
+            System.out.println(result);
         return result;
      }
 }

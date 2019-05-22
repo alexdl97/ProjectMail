@@ -123,6 +123,9 @@ public class DAdministrativo {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel adms = new DefaultTableModel();
+        adms.setColumnIdentifiers(new Object[]{
+            "id", "codigo","nombre", "telefono", "estado", "cargo", "fecha_ingreso"
+        });
         String sql = "SELECT * FROM administrativo WHERE estado = 'A'";
         try {
             // La ejecuto
@@ -185,6 +188,33 @@ public class DAdministrativo {
             System.out.println(ex.getMessage());
         }
         return 0;
+    }
+    
+    public int getIdAdm() {
+        this.conexion.abrirConexion();
+        Connection con = this.conexion.getConexion();
+        String sql = "SELECT * FROM administrativo WHERE estado = 'A' AND codigo = ? LIMIT 1";
+        try {
+            // La ejecuto
+            PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            // El segundo parametro de usa cuando se tienen tablas que generan llaves primarias
+            // es bueno cuando nuestra bd tiene las primarias autoincrementables
+            stmt.setString(1, this.codigo);
+            ResultSet result = stmt.executeQuery();
+            id = 0;
+             while (result.next()) {
+                id = result.getInt("id");
+            }
+             
+            // Cierro Conexion
+            this.conexion.cerrarConexion();
+
+            // Obtengo el id generado pra devolverlo
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return id;
     }
     
     public DefaultTableModel getAdministrativo() {

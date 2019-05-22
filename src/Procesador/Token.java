@@ -32,6 +32,10 @@ public class Token {
     public static final int OBTENERCLIENTE = 103;
     public static final int OBTENERCLIENTES = 104;
     
+    public static final int OBTENERADMINISTRATIVOS = 105;
+    public static final int REGISTRARADMINISTRATIVO = 106;
+    public static final int MODIFICARADMINISTRATIVO = 107;
+    public static final int ELIMINARADMINISTRATIVO = 108;
      //public static final int M = 150;   
      
     private int nombre;

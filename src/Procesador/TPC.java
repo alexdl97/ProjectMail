@@ -24,69 +24,12 @@ public class TPC {
             "ELIMINARCLIENTE",
             "OBTENERCLIENTE",
             "OBTENERCLIENTES",
-
-            "REGISTRARMASCOTA",
-            "MODIFICARMASCOTA",
-            "ELIMINARMASCOTA",
-            "OBTENERMASCOTA",
-            "MOSTRARMASCOTAS",
             
-            "REGISTRARESTADO",
-            "MODIFICARESTADO",
-            "ELIMINARESTADO",
-            "OBTENERESTADO",
-            "MOSTRARESTADOS",
-
-            "REGISTRARPERSONAL",
-            "MODIFICARPERSONAL",
-            "ELIMINARPERSONAL",
-            "OBTENERPERSONAL",
-            "MOSTRARPERSONALS",
-            
-            "REGISTRARSERVICIO",
-            "MODIFICARSERVICIO",
-            "ELIMINARSERVICIO",
-            "OBTENERSERVICIO",
-            "MOSTRARSERVICIOS",
-
-            "REGISTRARPROMOCION",
-            "MODIFICARPROMOCION",
-            "ELIMINARPROMOCION",
-            "OBTENERPROMOCION",
-            "MOSTRARPROMOCIONS",
-            
-            "REGISTRARFICHAATENCION",
-            "MODIFICARFICHAATENCION",
-            "ELIMINARFICHAATENCION",
-            "OBTENERFICHAATENCION",
-            "MOSTRARFICHAATENCIONS",
-            
-            "REGISTRARRESERVA",
-            "MODIFICARRESERVA",
-            "ELIMINARRESERVA",
-            "OBTENERRESERVA",
-            "MOSTRARRESERVAS",
-            
-            "REGISTRARDETALLE",   
-            "ELIMINARDETALLE",
-            "OBTENERDETALLE",
-            "MOSTRARDETALLES",
-            
-            "REGISTRARTRATAMIENTO",
-            "MODIFICARTRATAMIENTO",
-            "ELIMINARTRATAMIENTO",
-            "OBTENERTRATAMIENTO",
-            "MOSTRARTRATAMIENTOS",
-            
-            "MASCOTAESPECIES",
-            "SERVICIOSMASSOLICITADOS",
-             
-            "CONSULTACLIENTE",
-            "CONSULTAMASCOTA",
-            
-            "SEGUIMIENTOMASCOTA",
-            "HISTORIACLINICA",
-            "REGISTRARME"
+            "OBTENERADMINISTRATIVOS",
+            "REGISTRARADMINISTRATIVO",
+            "MODIFICARADMINISTRATIVO",
+            "ELIMINARADMINISTRATIVO"
+           
     ));
 
     private static final LinkedList<Token> tokens = new LinkedList<>(Arrays.asList(
@@ -97,7 +40,11 @@ public class TPC {
             new Token(Token.FUNC, Token.MODIFICARCLIENTE, "MODIFICARCLIENTE"),
             new Token(Token.FUNC, Token.ELIMINARCLIENTE, "ELIMINARCLIENTE"),
             new Token(Token.FUNC, Token.OBTENERCLIENTE, "OBTENERCLIENTE"),
-            new Token(Token.FUNC, Token.OBTENERCLIENTES, "OBTENERCLIENTES")
+            new Token(Token.FUNC, Token.OBTENERCLIENTES, "OBTENERCLIENTES"),
+            new Token(Token.FUNC, Token.OBTENERADMINISTRATIVOS, "OBTENERADMINISTRATIVOS"),
+            new Token(Token.FUNC, Token.REGISTRARADMINISTRATIVO, "REGISTRARADMINISTRATIVO"),
+            new Token(Token.FUNC, Token.MODIFICARADMINISTRATIVO, "MODIFICARADMINISTRATIVO"),
+            new Token(Token.FUNC, Token.ELIMINARADMINISTRATIVO, "ELIMINARADMINISTRATIVO")
 
     ));
 

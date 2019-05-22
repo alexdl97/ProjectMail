@@ -14,11 +14,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ADL
  */
-public class NAdministrador {
+public class NAdministrativo {
 
     private DAdministrativo adm;
 
-    public NAdministrador() {
+    public NAdministrativo() {
         adm = new DAdministrativo();
     }
 
@@ -26,8 +26,8 @@ public class NAdministrador {
         return adm.getAdministrativos();
     }
 
-    public int registrar(String codigo, String nombre, String telefono, String estado, String cargo, Date fecha_ingreso) {
-        adm = new DAdministrativo(codigo, nombre, telefono, estado, cargo, fecha_ingreso);
+    public int registrar(String codigo, String nombre, String telefono, String cargo, Date fecha_ingreso) {
+        adm = new DAdministrativo(codigo, nombre, telefono, "A", cargo, fecha_ingreso);
         return adm.registrar();
     }
 
@@ -36,12 +36,16 @@ public class NAdministrador {
         return adm.getAdministrativo();
     }
 
-    public int modificar(int id, String codigo, String nombre, String telefono, String estado, String cargo, Date fecha_ingreso) {
-        adm = new DAdministrativo(id, codigo, nombre, telefono, estado, cargo, fecha_ingreso);
+    public int modificar(String codigo, String nombre, String telefono, String cargo, Date fecha_ingreso) {
+        adm.setCodigo(codigo);
+        int id = adm.getIdAdm();
+        adm = new DAdministrativo(id , codigo, nombre, telefono, "A", cargo, fecha_ingreso);
         return adm.modificar();
     }
 
-    public int eliminar(int id) {
+    public int eliminar(String codigo) {
+        adm.setCodigo(codigo);
+        int id = adm.getIdAdm();
         adm.setId(id);
         return adm.eliminar();
     }
