@@ -208,6 +208,33 @@ public class DProveedor {
         return proveedor;
     }
     
+        public int getIdProveedor() {
+        this.conexion.abrirConexion();
+        Connection con = this.conexion.getConexion();
+        String sql = "SELECT * FROM proveedor WHERE estado = 'A' AND id = ? LIMIT 1";
+        try {
+            // La ejecuto
+            PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            // El segundo parametro de usa cuando se tienen tablas que generan llaves primarias
+            // es bueno cuando nuestra bd tiene las primarias autoincrementables
+            stmt.setString(1, this.codigo);
+            ResultSet result = stmt.executeQuery();
+            id = 0;
+             while (result.next()) {
+                id = result.getInt("id");
+            }
+             
+            // Cierro Conexion
+            this.conexion.cerrarConexion();
+
+            // Obtengo el id generado pra devolverlo
+           
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return id;
+    }
+    
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();

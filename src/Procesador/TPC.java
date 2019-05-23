@@ -13,39 +13,67 @@ import java.util.LinkedList;
  * @author ADL
  */
 public class TPC {
-    
+
     private static final LinkedList<String> lexemas = new LinkedList<>(Arrays.asList(
             "HELP",
             "TRUE",
             "FALSE",
-            
+            // CU GESTION DE USUARIO
             "REGISTRARCLIENTE",
             "MODIFICARCLIENTE",
             "ELIMINARCLIENTE",
             "OBTENERCLIENTE",
             "OBTENERCLIENTES",
-            
             "OBTENERADMINISTRATIVOS",
             "REGISTRARADMINISTRATIVO",
             "MODIFICARADMINISTRATIVO",
-            "ELIMINARADMINISTRATIVO"
-           
+            "ELIMINARADMINISTRATIVO",
+            "OBTENERPROVEEDORES",
+            "REGISTRARPROVEEDOR",
+            "MODIFICARPROVEEDOR",
+            "ELIMINARPROVEEDOR",
+            // CU GESTIONAR PRODUCTO
+            "OBTENERTIPOSPRODUCTOS",
+            "REGISTRARTIPOPRODUCTO",
+            "MODIFICARTIPOPRODUCTO",
+            "ELIMINARTIPOPRODUCTO",
+            "OBTENERPRODUCTOS",
+            "REGISTRARPRODUCTO",
+            "MODIFICARPRODUCTO",
+            "ELIMINARPRODUCTO"
+            
     ));
 
     private static final LinkedList<Token> tokens = new LinkedList<>(Arrays.asList(
             new Token(Token.HELP, -1, "HELP"),
             new Token(Token.TRUE, -1, "TRUE"),
             new Token(Token.FALSE, -1, "FALSE"),
+            // CASO DE USO GESTIONAR USUARIO
             new Token(Token.FUNC, Token.REGISTRARCLIENTE, "REGISTRARCLIENTE"),
             new Token(Token.FUNC, Token.MODIFICARCLIENTE, "MODIFICARCLIENTE"),
             new Token(Token.FUNC, Token.ELIMINARCLIENTE, "ELIMINARCLIENTE"),
             new Token(Token.FUNC, Token.OBTENERCLIENTE, "OBTENERCLIENTE"),
             new Token(Token.FUNC, Token.OBTENERCLIENTES, "OBTENERCLIENTES"),
+            
             new Token(Token.FUNC, Token.OBTENERADMINISTRATIVOS, "OBTENERADMINISTRATIVOS"),
             new Token(Token.FUNC, Token.REGISTRARADMINISTRATIVO, "REGISTRARADMINISTRATIVO"),
             new Token(Token.FUNC, Token.MODIFICARADMINISTRATIVO, "MODIFICARADMINISTRATIVO"),
-            new Token(Token.FUNC, Token.ELIMINARADMINISTRATIVO, "ELIMINARADMINISTRATIVO")
-
+            new Token(Token.FUNC, Token.ELIMINARADMINISTRATIVO, "ELIMINARADMINISTRATIVO"),
+            
+            new Token(Token.FUNC, Token.OBTENERPROVEEDORES, "OBTENERPROVEEDORES"),
+            new Token(Token.FUNC, Token.REGISTRARPROVEEDOR, "REGISTRARPROVEEDOR"),
+            new Token(Token.FUNC, Token.MODIFICARPROVEEDOR, "MODIFICARPROVEEDOR"),
+            new Token(Token.FUNC, Token.ELIMINARPROVEEDOR, "ELIMINARPROVEEDOR"),
+            // CASO DE USO GESTIONAR PRODUCTO
+            new Token(Token.FUNC, Token.OBTENERTIPOSPRODUCTOS, "OBTENERTIPOSPRODUCTOS"),
+            new Token(Token.FUNC, Token.REGISTRARTIPOPRODUCTO, "REGISTRARTIPOPRODUCTO"),
+            new Token(Token.FUNC, Token.MODIFICARTIPOPRODUCTO, "MODIFICARTIPOPRODUCTO"),
+            new Token(Token.FUNC, Token.ELIMINARTIPOPRODUCTO, "ELIMINARTIPOPRODUCTO"),
+            
+            new Token(Token.FUNC, Token.OBTENERPRODUCTOS, "OBTENERPRODUCTOS"),
+            new Token(Token.FUNC, Token.REGISTRARPRODUCTO, "REGISTRARPRODUCTO"),
+            new Token(Token.FUNC, Token.MODIFICARPRODUCTO, "MODIFICARPRODUCTO"),
+            new Token(Token.FUNC, Token.ELIMINARPRODUCTO, "ELIMINARPRODUCTO")
     ));
 
     public static Token estaEnTPC(String lexema) {

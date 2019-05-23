@@ -10,6 +10,7 @@ package Procesador;
  * @author ADL
  */
 public class Token {
+
     // Constantes
     public static final int NUM = 0; // Numero Valor
     public static final int STRING = 1; // String Constante
@@ -23,7 +24,7 @@ public class Token {
     public static final int TRUE = 9;
     public static final int FALSE = 10;
     public static final int HELP = 11;
-    public static final int BARRA =12;// |
+    public static final int BARRA = 12;// |
 
 //Funciones
     public static final int REGISTRARCLIENTE = 100;
@@ -31,13 +32,28 @@ public class Token {
     public static final int ELIMINARCLIENTE = 102;
     public static final int OBTENERCLIENTE = 103;
     public static final int OBTENERCLIENTES = 104;
-    
+
     public static final int OBTENERADMINISTRATIVOS = 105;
     public static final int REGISTRARADMINISTRATIVO = 106;
     public static final int MODIFICARADMINISTRATIVO = 107;
     public static final int ELIMINARADMINISTRATIVO = 108;
-     //public static final int M = 150;   
-     
+
+    public static final int OBTENERPROVEEDORES = 109;
+    public static final int REGISTRARPROVEEDOR = 110;
+    public static final int MODIFICARPROVEEDOR = 111;
+    public static final int ELIMINARPROVEEDOR = 112;
+
+    public static final int OBTENERTIPOSPRODUCTOS = 113;
+    public static final int REGISTRARTIPOPRODUCTO = 114;
+    public static final int MODIFICARTIPOPRODUCTO = 115;
+    public static final int ELIMINARTIPOPRODUCTO = 116;
+    
+    public static final int OBTENERPRODUCTOS = 117;
+    public static final int REGISTRARPRODUCTO = 118;
+    public static final int MODIFICARPRODUCTO = 119;
+    public static final int ELIMINARPRODUCTO = 120;
+    //public static final int M = 150;   
+
     private int nombre;
     private int atributo;
     private String toStr;

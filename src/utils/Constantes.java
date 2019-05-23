@@ -21,9 +21,9 @@ public class Constantes {
     // Constantes de la Base de Datos
     //public static final String DB_HOST = "virtual.fcet.uagrm.edu.bo";
     public static final String DB_HOST = "localhost";
-    public static final String DB_USER = "alex";
-    public static final String DB_PASSWORD = "alex123456";
-    public static final String DB_NAME = "db_impresol";
+    public static final String DB_USER = "postgres";
+    public static final String DB_PASSWORD = "admin";
+    public static final String DB_NAME = "db_grupo02sc";
     
     public static final String MsgAyuda = "Comandos de Ayuda ";
 }

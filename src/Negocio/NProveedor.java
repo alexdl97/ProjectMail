@@ -33,12 +33,16 @@ public class NProveedor {
         return prov.getProveedor();
     }
     
-    public int modificar(int id, String codigo, String nombre, String telefono, String direccion) {
+    public int modificar(String codigo, String nombre, String telefono, String direccion) {
+        prov.setCodigo(codigo);
+        int id = prov.getIdProveedor();
         prov = new DProveedor(id, codigo, nombre,telefono, direccion, "A");
         return prov.modificar();
     }
     
-    public int eliminar(int id) {
+   public int eliminar(String codigo) {
+        prov.setCodigo(codigo);
+        int id = prov.getIdProveedor();
         prov.setId(id);
         return prov.eliminar();
     }

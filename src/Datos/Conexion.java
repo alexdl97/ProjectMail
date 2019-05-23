@@ -45,7 +45,7 @@ public class Conexion {
         try {
             Class.forName("org.postgresql.Driver");
             this.connection = DriverManager.getConnection(url_db, this.user, this.password);
-            System.out.println(this.connection);
+            System.out.println("Conexion Exitosa: " + this.connection);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());
