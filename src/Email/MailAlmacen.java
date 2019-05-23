@@ -5,7 +5,7 @@
  */
 package Email;
 
-import Negocio.NProducto;
+import Negocio.NAlmacen;
 import Procesador.Analex;
 import Procesador.Token;
 import Protocolos.SMTP;
@@ -15,21 +15,16 @@ import utils.Tools;
  *
  * @author Junior Guzman
  */
-public class MailProducto extends TemplateMail{
+public class MailAlmacen extends TemplateMail{
     
-    private NProducto producto;
+    private NAlmacen almacen;
     
-    public MailProducto() throws Exception {
-        this.producto = new NProducto();
+    public MailAlmacen() throws Exception {
+        this.almacen = new NAlmacen();
     }
 
     @Override
     public void registrar(Analex analex, String destinatario) throws Exception {
-
-    }
-
-    @Override
-    public void modificar(Analex analex, String destinatario) throws Exception {
          // Obtengo el Siguiente token
         analex.Avanzar();
         Token token = analex.Preanalisis();
@@ -48,38 +43,51 @@ public class MailProducto extends TemplateMail{
             analex.Avanzar();
             // Atributos      
             String codigo = Tools.quitarComillas(analex.Preanalisis().getToStr());
-            analex.Avanzar();
-            analex.Avanzar();
-            String marca = Tools.quitarComillas(analex.Preanalisis().getToStr());
-            analex.Avanzar();
-            analex.Avanzar();
-            String modelo = Tools.quitarComillas(analex.Preanalisis().getToStr());
-            analex.Avanzar();
-            analex.Avanzar();
-            int precio = analex.Preanalisis().getAtributo();
-            analex.Avanzar();
-            analex.Avanzar();
-            int costo = analex.Preanalisis().getAtributo();
-            analex.Avanzar();
-            analex.Avanzar();
-            String codigoLote = Tools.quitarComillas(analex.Preanalisis().getToStr());
-            analex.Avanzar();
-            analex.Avanzar();
-            String tipoProducto = Tools.quitarComillas(analex.Preanalisis().getToStr());
-            
-
-           // producto.modificar(codigo, marca, modelo, precio, costo, codigoLote, tipoProducto);
-            System.out.println("SUPUESTAMENTE GUARDO");
+            almacen.registrar(codigo);
+            //mimeMail mimemailer = new mimeMail();            
+            //mimemailer.sendHtmlEmail(correoDest, "Registrar Cliente", Constante.IngresoPositivoR+"\n\n"+ Herramientas.dibujarTablawithHTMLwithoutOpciones(clienteNegocio.mostrarClientes()));                   
+            System.out.println("SUPUESTAMENTE REGISTRO");
         } catch (Exception e) {
             //SMTP.sendMail(correoDest, "Registrar Cliente", Constantes.IngresoErrorR+"\n"+"Mensaje enviado: "+ analex.M.texto);
-            SMTP.sendMail(destinatario, "Registrar Cliente", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);
+            SMTP.sendMail(destinatario, "Registrar Almacen", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);
+
+        }
+    }
+
+    @Override
+    public void modificar(Analex analex, String destinatario) throws Exception {
+        // Obtengo el Siguiente token
+        analex.Avanzar();
+        Token token = analex.Preanalisis();
+
+        // Reviso si no es ayuda
+        if (token.getNombre() == Token.HELP) {
+            // Mostrar ayuda de esa funcionalidad
+            // Enviar correo con la ayuda
+            //clienteNegocio clienteNegocio = new clienteNegocio();
+            //String mensaje = Herramientas.dibujarTabla(clienteNegocio.mostrarClientes());
+            //SMTP.sendMail(correoDest, Constante.msgAyudaPropietario+"\n\n",Comandos_Ayuda.AYUDA_REGISTRARCLIENTE);
+            return;
+        }
+        try {
+            // Sino, ejecutar el comando
+            analex.Avanzar();
+            // Atributos      
+            int id = analex.Preanalisis().getAtributo();
+            analex.Avanzar();
+            analex.Avanzar();
+            String codigo = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            almacen.modificar(id, codigo);
+            System.out.println("SUPUESTAMENTE ACTUALIZDO");
+        } catch (Exception e) {
+            //SMTP.sendMail(correoDest, "Registrar Cliente", Constantes.IngresoErrorR+"\n"+"Mensaje enviado: "+ analex.M.texto);
+            SMTP.sendMail(destinatario, "Actualizar almacen", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);
 
         }
     }
 
     @Override
     public void eliminar(Analex analex, String destinatario) throws Exception {
-          // Obtengo el Siguiente token
         analex.Avanzar();
         Token token = analex.Preanalisis();
 
@@ -97,21 +105,20 @@ public class MailProducto extends TemplateMail{
             // Atributos      
             int id = analex.Preanalisis().getAtributo();
             analex.Avanzar();
-            producto.eliminar(id);
+            almacen.eliminar(id);
             System.out.println("ELIMINO");
             //MimeMail mimemailer = new MimeMail();
             //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
             //SMTP.sendMail(correoDest,"OBTENERCLIENTES", "Lista de Clientes\n" + Tools.dibujarDatos(cliente.getClientes()));
         } catch (Exception e) {
-            SMTP.sendMail(destinatario, "Eliminar producto", "error durante la eliminacion del producto, verifique con el comando HELP");
+            SMTP.sendMail(destinatario, "Eliminar almacen", "error durante la obtencion de la tabla, verifique con el comando HELP");
 
         }
-
     }
 
     @Override
     public void listar(Analex analex, String destinatario) throws Exception {
-               // Obtengo el Siguiente token
+                    // Obtengo el Siguiente token
         analex.Avanzar();
         Token token = analex.Preanalisis();
 
@@ -126,11 +133,13 @@ public class MailProducto extends TemplateMail{
         try {
             //MimeMail mimemailer = new MimeMail();
             //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
-            SMTP.sendMail(destinatario, "OBTENER PRODUCTOS", "Lista de productos\n" + Tools.dibujarDatos(producto.getProductos()));
+            SMTP.sendMail(destinatario, "OBTENER ALMACEN", "Lista de TIPO PRODUCTO\n" + Tools.dibujarDatos(almacen.getAlmacenes()));
         } catch (Exception e) {
-            SMTP.sendMail(destinatario, "Mostrar Productos", "error durante la obtencion de la tabla, verifique con el comando HELP");
+            SMTP.sendMail(destinatario, "Mostrar almacenes", "error durante la obtencion de la tabla, verifique con el comando HELP");
 
-        }       
-    }
-    
+        }
+
+        //  String mensaje = Herramientas.dibujarTabla(clienteNegocio.mostrarClientes());        
+        //  clienteSMTP.sendMail(correoDest, "Mostrar Clientes\n\n", mensaje);   
+    }  
 }

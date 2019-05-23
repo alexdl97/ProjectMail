@@ -19,5 +19,5 @@ public abstract class TemplateMail {
 
     protected abstract void eliminar(Analex analex, String destinatario) throws Exception;
 
-    protected abstract void listar() throws Exception;
+    protected abstract void listar(Analex analex, String destinatario) throws Exception;
 }

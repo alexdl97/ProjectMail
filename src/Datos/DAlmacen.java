@@ -116,6 +116,68 @@ public class DAlmacen {
         return lote;
     }
     
+    public int registrar() {
+         // Abro y obtengo la conexion
+        this.conexion.abrirConexion();
+        Connection con = this.conexion.getConexion();
+
+        String sql = "INSERT INTO almacen(codigo) " +
+                      "VALUES(?)";
+        try {
+            // La ejecuto
+            PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            // El segundo parametro de usa cuando se tienen tablas que generan llaves primarias
+            // es bueno cuando nuestra bd tiene las primarias autoincrementables
+            stmt.setString(1, this.codigo);
+            int rows = stmt.executeUpdate();
+
+            // Cierro Conexion
+            this.conexion.cerrarConexion();
+
+            // Obtengo el id generado pra devolverlo
+            if (rows != 0) {
+                ResultSet generateKeys = stmt.getGeneratedKeys();
+                if (generateKeys.next()) {
+                    return generateKeys.getInt(1);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+    
+    public int modificar() {
+        this.conexion.abrirConexion();
+        Connection con = this.conexion.getConexion();
+
+        String sql = "UPDATE almacen SET codigo = ?" +
+                "WHERE id = ?";
+        try {
+            // La ejecuto
+            PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            // El segundo parametro de usa cuando se tienen tablas que generan llaves primarias
+            // es bueno cuando nuestra bd tiene las primarias autoincrementables
+            stmt.setString(1, this.codigo);
+            stmt.setInt(2, this.id);
+            int rows = stmt.executeUpdate();
+
+            // Cierro Conexion
+            this.conexion.cerrarConexion();
+
+            // Obtengo el id generado pra devolverlo
+            if (rows != 0) {
+                ResultSet generateKeys = stmt.getGeneratedKeys();
+                if (generateKeys.next()) {
+                    return generateKeys.getInt(1);
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+    
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();

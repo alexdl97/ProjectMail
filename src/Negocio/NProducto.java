@@ -37,9 +37,10 @@ public class NProducto {
     }
     
     public int modificar(int id, String codigo, String marca, String modelo, double precio,
-            double costo, String estado, int loteid, int tipoproductoid) {
-        producto = new DProducto(id, codigo, marca, modelo, precio, costo, estado, loteid, tipoproductoid);
-        return producto.modificar();
+        double costo, String estado, String codigoLote, String tipoProducto) {
+     //   int loteId = 
+    //    producto = new DProducto(id, codigo, marca, modelo, precio, costo, estado, loteid, tipoproductoid);
+        return 1;
     }
     
     public int eliminar(int id) {

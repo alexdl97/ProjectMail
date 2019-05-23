@@ -27,6 +27,19 @@ public class NAlmacen {
         almacen.setId(id);
         return almacen.getAlmacen();
     }
+        public int registrar(String codigo) {
+        almacen = new DAlmacen(codigo);
+        return almacen.registrar();
+    }
     
+    public int modificar(int id, String codigo) {
+        almacen = new DAlmacen(id, codigo);
+        return almacen.modificar();
+    }
+    
+    public int eliminar(int id) {
+        almacen.setId(id);
+        return almacen.eliminar();
+    }
     
 }

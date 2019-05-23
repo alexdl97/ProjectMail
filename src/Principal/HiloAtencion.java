@@ -5,6 +5,9 @@
  */
 package Principal;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ADL
@@ -18,7 +21,12 @@ public class HiloAtencion extends Thread {
     
     @Override
     public void run() {
-         new Impresol().procesarMensaje(mensaje);
+        try {
+            new Impresol().procesarMensaje(mensaje);
+        } catch (Exception ex) {
+            System.out.println("Error al levantar el servidor");
+            Logger.getLogger(HiloAtencion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
