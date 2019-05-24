@@ -13,11 +13,11 @@ import Procesador.Analex;
  */
 public abstract class TemplateMail {
 
-    protected abstract void registrar(Analex analex, String destinatario) throws Exception;
+    public abstract void registrar(Analex analex, String destinatario) throws Exception;
 
-    protected abstract void modificar(Analex analex, String destinatario) throws Exception;
+    public abstract void modificar(Analex analex, String destinatario) throws Exception;
 
-    protected abstract void eliminar(Analex analex, String destinatario) throws Exception;
+    public abstract void eliminar(Analex analex, String destinatario) throws Exception;
 
-    protected abstract void listar(Analex analex, String destinatario) throws Exception;
+    public abstract void listar(Analex analex, String destinatario) throws Exception;
 }

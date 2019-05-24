@@ -67,11 +67,14 @@ public class DTipoProducto {
         this.descripcion = descripcion;
         conexion = Conexion.getInstancia();
     }
-    
-     public DefaultTableModel getTipoProducto() {
+
+    public DefaultTableModel getTiposProductos() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
-        DefaultTableModel proveedores = new DefaultTableModel();
+        DefaultTableModel tiposProductos = new DefaultTableModel();
+        tiposProductos.setColumnIdentifiers(new Object[]{
+            "id", "descripcion"
+        });
         String sql = "SELECT * FROM TipoProducto";
         try {
             // La ejecuto
@@ -81,26 +84,26 @@ public class DTipoProducto {
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                proveedores.addRow(new Object[]{
+                tiposProductos.addRow(new Object[]{
                     result.getInt("id"),
-                    result.getString("descripcion"),
-                });
+                    result.getString("descripcion"),});
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return proveedores;
+        return tiposProductos;
     }
-     public int registrar() {
-         // Abro y obtengo la conexion
+
+    public int registrar() {
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO TipoProducto(descripcion) " +
-                      "VALUES(?)";
+        String sql = "INSERT INTO TipoProducto(descripcion) "
+                + "VALUES(?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -124,13 +127,16 @@ public class DTipoProducto {
         }
         return 0;
     }
-    
-    public DefaultTableModel getTipoProductos() {
-        
+
+    public DefaultTableModel getTipoProducto() {
+
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel tipoProducto = new DefaultTableModel();
-        String sql = "SELECT * FROM TipoProducto WHERE TipoProducto.id = ? LIMIT 1";
+        tipoProducto.setColumnIdentifiers(new Object[]{
+            "id", "descripcion"
+        });
+        String sql = "SELECT * FROM TipoProducto WHERE id = ? LIMIT 1";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -138,27 +144,25 @@ public class DTipoProducto {
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
             stmt.setInt(1, this.id);
             ResultSet result = stmt.executeQuery();
-            
-             while (result.next()) {
+
+            while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                 System.out.println("Descripcion --> " + result.getString("descripcion"));
-                tipoProducto.addRow(new Object[] {
+                System.out.println("Descripcion --> " + result.getString("descripcion"));
+                tipoProducto.addRow(new Object[]{
                     result.getInt("id"),
-                    result.getString("descripcion"),
-                });
+                    result.getString("descripcion"),});
             }
-             
+
             // Cierro Conexion
             this.conexion.cerrarConexion();
 
             // Obtengo el id generado pra devolverlo
-           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return tipoProducto;
     }
-    
+
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
@@ -188,7 +192,7 @@ public class DTipoProducto {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
@@ -212,5 +216,5 @@ public class DTipoProducto {
             System.out.println(ex.getMessage());
         }
         return -1;
-    } 
+    }
 }

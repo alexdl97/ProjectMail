@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ADL
  */
 public class DProducto {
-    
+
     private int id;
     private String codigo;
     private String marca;
@@ -28,7 +28,7 @@ public class DProducto {
     private int loteid;
     private int tipoproductoid;
     private Conexion conexion;
-    
+
     public DProducto() {
         id = 0;
         codigo = "";
@@ -53,7 +53,7 @@ public class DProducto {
         this.loteid = loteid;
         this.tipoproductoid = tipoproductoid;
     }
-    
+
     public DProducto(int id, String codigo, String marca, String modelo, double precio, double costo, String estado, int loteid, int tipoproductoid) {
         this.id = id;
         this.codigo = codigo;
@@ -137,11 +137,14 @@ public class DProducto {
     public void setTipoproductoid(int tipoproductoid) {
         this.tipoproductoid = tipoproductoid;
     }
-    
+
     public DefaultTableModel getProductos() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
-        DefaultTableModel lotes = new DefaultTableModel();
+        DefaultTableModel productos = new DefaultTableModel();
+        productos.setColumnIdentifiers(new Object[]{
+            "id", "codigo", "marca", "modelo", "precio", "costo", "estado", "loteid", "tipoproductoid"
+        });
         String sql = "SELECT * FROM producto WHERE estado = 'A'";
         try {
             // La ejecuto
@@ -151,7 +154,7 @@ public class DProducto {
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                lotes.addRow(new Object[]{
+                productos.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
                     result.getString("marca"),
@@ -165,20 +168,20 @@ public class DProducto {
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return lotes;
+        return productos;
     }
-    
+
     public int registrar() {
-         // Abro y obtengo la conexion
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO producto(codigo, marca, modelo, precio, costo, estado, loteid, tipoproductoid) " +
-                      "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO producto(codigo, marca, modelo, precio, costo, estado, loteid, tipoproductoid) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -208,9 +211,9 @@ public class DProducto {
         }
         return 0;
     }
-    
+
     public DefaultTableModel getProducto() {
-        
+
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel lote = new DefaultTableModel();
@@ -222,10 +225,10 @@ public class DProducto {
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
             stmt.setInt(1, this.id);
             ResultSet result = stmt.executeQuery();
-            
-             while (result.next()) {
+
+            while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                lote.addRow(new Object[] {
+                lote.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
                     result.getString("marca"),
@@ -237,24 +240,23 @@ public class DProducto {
                     result.getInt("tipoproductoid")
                 });
             }
-             
+
             // Cierro Conexion
             this.conexion.cerrarConexion();
 
             // Obtengo el id generado pra devolverlo
-           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return lote;
     }
-    
+
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "UPDATE producto SET codigo = ?, marca = ?, modelo = ?, precio = ?, costo = ? " +
-                "estado = ?, loteid = ?, tipoproductoid = ? WHERE producto.id = ?";
+        String sql = "UPDATE producto SET codigo = ?, marca = ?, modelo = ?, precio = ?, costo = ? "
+                + "estado = ?, loteid = ?, tipoproductoid = ? WHERE producto.id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -285,7 +287,7 @@ public class DProducto {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();

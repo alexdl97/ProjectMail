@@ -17,14 +17,14 @@ import javax.swing.table.DefaultTableModel;
  * @author ADL
  */
 public class DUsuario {
-    
+
     private int id;
     private String usuario;
     private String contrasenia;
     private String estado;
     private int administrativoid;
     private Conexion conexion;
-    
+
     public DUsuario() {
         this.id = 0;
         this.usuario = "";
@@ -42,7 +42,7 @@ public class DUsuario {
         this.administrativoid = administrativoid;
         conexion = Conexion.getInstancia();
     }
-    
+
     public DUsuario(int id, String usuario, String contrasenia, String estado, int administrativoid) {
         this.id = id;
         this.usuario = usuario;
@@ -91,11 +91,14 @@ public class DUsuario {
     public void setAdministrativoid(int administrativoid) {
         this.administrativoid = administrativoid;
     }
-    
+
     public DefaultTableModel getUsuarios() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
-        DefaultTableModel users = new DefaultTableModel();
+        DefaultTableModel usuarios = new DefaultTableModel();
+        usuarios.setColumnIdentifiers(new Object[]{
+            "id", "usuario", "contrasenia", "estado", "administrativoid"
+        });
         String sql = "SELECT * FROM usuario WHERE estado = 'A'";
         try {
             // La ejecuto
@@ -105,30 +108,29 @@ public class DUsuario {
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                users.addRow(new Object[]{
+                usuarios.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("usuario"),
                     result.getString("contrasenia"),
                     result.getString("estado"),
-                    result.getString("administrativoid"),
-                });
+                    result.getString("administrativoid"),});
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return users;
+        return usuarios;
     }
-    
+
     public int registrar() {
-         // Abro y obtengo la conexion
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO usuario(usuario, contrasenia, estado, administrativoid) " +
-                      "VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario(usuario, contrasenia, estado, administrativoid) "
+                + "VALUES(?, ?, ?, ?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -155,9 +157,9 @@ public class DUsuario {
         }
         return 0;
     }
-    
+
     public DefaultTableModel getUsuario() {
-        
+
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel user = new DefaultTableModel();
@@ -169,11 +171,11 @@ public class DUsuario {
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
             stmt.setInt(1, this.id);
             ResultSet result = stmt.executeQuery();
-            
-             while (result.next()) {
+
+            while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                 System.out.println("NOMBRE --> " + result.getString("usuario"));
-                user.addRow(new Object[] {
+                System.out.println("NOMBRE --> " + result.getString("usuario"));
+                user.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("usuario"),
                     result.getString("contrasenia"),
@@ -181,24 +183,23 @@ public class DUsuario {
                     result.getString("administrativoid")
                 });
             }
-             
+
             // Cierro Conexion
             this.conexion.cerrarConexion();
 
             // Obtengo el id generado pra devolverlo
-           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return user;
     }
-    
+
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "UPDATE usuario SET usuario = ?, contrasenia = ?, estado = ?, administrativoid = ? " +
-                "WHERE usuario.id = ?";
+        String sql = "UPDATE usuario SET usuario = ?, contrasenia = ?, estado = ?, administrativoid = ? "
+                + "WHERE usuario.id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -226,7 +227,7 @@ public class DUsuario {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
@@ -251,5 +252,5 @@ public class DUsuario {
         }
         return -1;
     }
-    
+
 }

@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ADL
  */
 public class DEntrega {
+
     private int id;
     private String codigo;
     private Date fecha_registro;
@@ -28,7 +29,7 @@ public class DEntrega {
     private int notaventaid;
     private int tipoentregaid;
     private Conexion conexion;
-    
+
     public DEntrega() {
         id = 0;
         codigo = "";
@@ -41,7 +42,7 @@ public class DEntrega {
         tipoentregaid = 0;
         conexion = Conexion.getInstancia();
     }
-    
+
     public DEntrega(String codigo, Date fecha_registro, Date fecha_entrega, String destino, String estado, int administrativoid, int notaventaid, int tipoentregaid) {
         this.codigo = codigo;
         this.fecha_registro = fecha_registro;
@@ -136,11 +137,14 @@ public class DEntrega {
     public void setTipoentregaid(int tipoentregaid) {
         this.tipoentregaid = tipoentregaid;
     }
-    
+
     public DefaultTableModel getEntregas() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
-        DefaultTableModel lotes = new DefaultTableModel();
+        DefaultTableModel entregas = new DefaultTableModel();
+        entregas.setColumnIdentifiers(new Object[]{
+            "id", "codigo", "fecha_registro", "fecha_entrega", "destino", "estado", "administrativoid", "notaventaid", "tipoentregaid"
+        });
         String sql = "SELECT * FROM entrega WHERE estado = 'A'";
         try {
             // La ejecuto
@@ -150,7 +154,7 @@ public class DEntrega {
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                lotes.addRow(new Object[]{
+                entregas.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
                     result.getDate("fecha_registro"),
@@ -164,20 +168,20 @@ public class DEntrega {
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return lotes;
+        return entregas;
     }
-    
+
     public int registrar() {
-         // Abro y obtengo la conexion
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO entrega(codigo, fecha_registro, fecha_entrega, destino, estado, administrativoid, notaventaid, tipoentregaid) " +
-                      "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO entrega(codigo, fecha_registro, fecha_entrega, destino, estado, administrativoid, notaventaid, tipoentregaid) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -208,9 +212,9 @@ public class DEntrega {
         }
         return 0;
     }
-    
+
     public DefaultTableModel getEntrega() {
-        
+
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel lote = new DefaultTableModel();
@@ -222,10 +226,10 @@ public class DEntrega {
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
             stmt.setInt(1, this.id);
             ResultSet result = stmt.executeQuery();
-            
-             while (result.next()) {
+
+            while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                lote.addRow(new Object[] {
+                lote.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
                     result.getDate("fecha_registro"),
@@ -237,24 +241,23 @@ public class DEntrega {
                     result.getInt("tipoentregaid")
                 });
             }
-             
+
             // Cierro Conexion
             this.conexion.cerrarConexion();
 
             // Obtengo el id generado pra devolverlo
-           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return lote;
     }
-    
+
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "UPDATE entrega SET codigo = ?, fecha_registro = ?, fecha_entrega = ?, " +
-                "destino = ?, estado = ?, administrativoid = ?, notaventaid = ?, tipoentregaid = ? WHERE entrega.id = ?";
+        String sql = "UPDATE entrega SET codigo = ?, fecha_registro = ?, fecha_entrega = ?, "
+                + "destino = ?, estado = ?, administrativoid = ?, notaventaid = ?, tipoentregaid = ? WHERE entrega.id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -286,7 +289,7 @@ public class DEntrega {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();

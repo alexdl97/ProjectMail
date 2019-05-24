@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ADL
  */
 public class DDetallePedido {
-    
+
     private int id;
     private int cantidad;
     private String descripcion;
@@ -25,7 +25,7 @@ public class DDetallePedido {
     private int pedidoid;
     private int productoid;
     private Conexion conexion;
-    
+
     public DDetallePedido() {
         id = 0;
         cantidad = -1;
@@ -35,7 +35,7 @@ public class DDetallePedido {
         productoid = 0;
         conexion = Conexion.getInstancia();
     }
-    
+
     public DDetallePedido(int cantidad, String descripcion, int pedidoid, int productoid) {
         this.id = 0;
         this.cantidad = cantidad;
@@ -99,11 +99,14 @@ public class DDetallePedido {
     public void setProductoid(int productoid) {
         this.productoid = productoid;
     }
-    
+
     public DefaultTableModel getDetallePedidos() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
-        DefaultTableModel detpedidos = new DefaultTableModel();
+        DefaultTableModel detallesPedido = new DefaultTableModel();
+        detallesPedido.setColumnIdentifiers(new Object[]{
+            "id", "cantidad", "descripcion", "total", "pedidoid", "productoid"
+        });
         String sql = "SELECT * FROM detallepedido WHERE detallepedido.pedidoid = ?";
         try {
             // La ejecuto
@@ -114,7 +117,7 @@ public class DDetallePedido {
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                detpedidos.addRow(new Object[]{
+                detallesPedido.addRow(new Object[]{
                     result.getInt("id"),
                     result.getInt("cantidad"),
                     result.getString("descripcion"),
@@ -125,20 +128,20 @@ public class DDetallePedido {
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return detpedidos;
+        return detallesPedido;
     }
-    
+
     public int registrar() {
-         // Abro y obtengo la conexion
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO detallepedido(cantidad, descripcion, total, pedidoid, productoid) " +
-                      "VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO detallepedido(cantidad, descripcion, total, pedidoid, productoid) "
+                + "VALUES(?, ?, ?, ?, ?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -166,7 +169,7 @@ public class DDetallePedido {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();

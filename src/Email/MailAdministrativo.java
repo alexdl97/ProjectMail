@@ -5,27 +5,28 @@
  */
 package Email;
 
-import Negocio.NProveedor;
+import Negocio.NAdministrativo;
 import Procesador.Analex;
 import Procesador.Token;
 import Protocolos.SMTP;
+import java.sql.Date;
 import utils.Tools;
 
 /**
  *
  * @author Junior Guzman
  */
-public class MailProveedor extends TemplateMail{
+public class MailAdministrativo extends TemplateMail{
     
-    private NProveedor proveedor;
+    private NAdministrativo administrativo;
     
-    public MailProveedor() throws Exception {
-    this.proveedor = new NProveedor();
+    public MailAdministrativo() throws Exception{ 
+    this.administrativo = new NAdministrativo();
     }
 
     @Override
     public void registrar(Analex analex, String destinatario) throws Exception {
-       // Obtengo el Siguiente token
+        // Obtengo el Siguiente token
         analex.Avanzar();
         Token token = analex.Preanalisis();
 
@@ -51,15 +52,24 @@ public class MailProveedor extends TemplateMail{
             String telefono = Tools.quitarComillas(analex.Preanalisis().getToStr());
             analex.Avanzar();
             analex.Avanzar();
-            String direccion = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            String cargo = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            analex.Avanzar();
+            analex.Avanzar();
+            String fecha_ingreso = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            int y = Integer.parseInt(Character.toString(fecha_ingreso.charAt(0)));
+            int m = Integer.parseInt(Character.toString(fecha_ingreso.charAt(1))) + 1;
+            int d = Integer.parseInt(Character.toString(fecha_ingreso.charAt(2)));
+            Date f = new Date(1000);
+            //String y = fecha_ingreso.charAt(0);
+            //REGISTAR {"adm","alex",123213,"2017-19-19"}
 
-            proveedor.registrar(codigo, nombre, telefono, direccion);
+            administrativo.registrar(codigo, nombre, telefono, cargo, f);
             //mimeMail mimemailer = new mimeMail();            
             //mimemailer.sendHtmlEmail(correoDest, "Registrar Cliente", Constante.IngresoPositivoR+"\n\n"+ Herramientas.dibujarTablawithHTMLwithoutOpciones(clienteNegocio.mostrarClientes()));                   
             System.out.println("SUPUESTAMENTE MODIFICO");
         } catch (Exception e) {
             //SMTP.sendMail(correoDest, "Registrar Cliente", Constantes.IngresoErrorR+"\n"+"Mensaje enviado: "+ analex.M.texto);
-            SMTP.sendMail(destinatario, "Registrar PROVEEDOR", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);
+            SMTP.sendMail(destinatario, "Registrar Cliente", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);
 
         }
     }
@@ -92,20 +102,29 @@ public class MailProveedor extends TemplateMail{
             String telefono = Tools.quitarComillas(analex.Preanalisis().getToStr());
             analex.Avanzar();
             analex.Avanzar();
-            String direccion = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            String cargo = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            analex.Avanzar();
+            analex.Avanzar();
+            String fecha_ingreso = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            int y = Integer.parseInt(Character.toString(fecha_ingreso.charAt(0)));
+            int m = Integer.parseInt(Character.toString(fecha_ingreso.charAt(1))) + 1;
+            int d = Integer.parseInt(Character.toString(fecha_ingreso.charAt(2)));
+            Date f = new Date(1000);
+            //String y = fecha_ingreso.charAt(0);
+            //REGISTAR {"adm","alex",123213,"2017-19-19"}
 
-            proveedor.modificar(codigo, nombre, telefono, direccion);
+            administrativo.modificar(codigo, nombre, telefono, cargo, f);
             System.out.println("SUPUESTAMENTE ACTUALIZDO");
         } catch (Exception e) {
             //SMTP.sendMail(correoDest, "Registrar Cliente", Constantes.IngresoErrorR+"\n"+"Mensaje enviado: "+ analex.M.texto);
-            SMTP.sendMail(destinatario, "Actualizar Proveedor", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);
+            SMTP.sendMail(destinatario, "Registrar Cliente", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);
 
         }
     }
 
     @Override
     public void eliminar(Analex analex, String destinatario) throws Exception {
-           // Obtengo el Siguiente token
+               // Obtengo el Siguiente token
         analex.Avanzar();
         Token token = analex.Preanalisis();
 
@@ -123,20 +142,20 @@ public class MailProveedor extends TemplateMail{
             // Atributos      
             String codigo = Tools.quitarComillas(analex.Preanalisis().getToStr());
             analex.Avanzar();
-            proveedor.eliminar(codigo);
+            administrativo.eliminar(codigo);
             System.out.println("ELIMINO");
             //MimeMail mimemailer = new MimeMail();
             //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
             //SMTP.sendMail(correoDest,"OBTENERCLIENTES", "Lista de Clientes\n" + Tools.dibujarDatos(cliente.getClientes()));
         } catch (Exception e) {
-            SMTP.sendMail(destinatario, "Eliminar proveedor", "error durante la obtencion de la tabla, verifique con el comando HELP");
+            SMTP.sendMail(destinatario, "Mostrar Clientes", "error durante la obtencion de la tabla, verifique con el comando HELP");
 
         }
     }
 
     @Override
     public void listar(Analex analex, String destinatario) throws Exception {
-       // Obtengo el Siguiente token
+               // Obtengo el Siguiente token
         analex.Avanzar();
         Token token = analex.Preanalisis();
 
@@ -151,14 +170,14 @@ public class MailProveedor extends TemplateMail{
         try {
             //MimeMail mimemailer = new MimeMail();
             //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
-            SMTP.sendMail(destinatario, "OBTENERPROVEEDORES", "Lista de PROVEEDORES\n" + Tools.dibujarDatos(proveedor.getProveedores()));
+            SMTP.sendMail(destinatario, "OBTENERADMINISTRATIVOS", "Lista de Administrativos\n" + Tools.dibujarDatos(administrativo.getAdministrativos()));
         } catch (Exception e) {
-            SMTP.sendMail(destinatario, "Mostrar Proveedores", "error durante la obtencion de la tabla, verifique con el comando HELP");
+            SMTP.sendMail(destinatario, "Mostrar Clientes", "error durante la obtencion de la tabla, verifique con el comando HELP");
 
         }
 
         //  String mensaje = Herramientas.dibujarTabla(clienteNegocio.mostrarClientes());        
-        //  clienteSMTP.sendMail(correoDest, "Mostrar Clientes\n\n", mensaje);   
+        //  clienteSMTP.sendMail(correoDest, "Mostrar Clientes\n\n", mensaje);  
     }
     
 }

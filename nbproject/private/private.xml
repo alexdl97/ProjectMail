@@ -3,9 +3,30 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/alex/Documents/NetBeansProjects/ProjectMail/src/utils/Tools.java</file>
-            <file>file:/C:/Users/alex/Documents/NetBeansProjects/ProjectMail/src/Presentador/Principal.java</file>
-            <file>file:/C:/Users/alex/Documents/NetBeansProjects/ProjectMail/src/Principal/Impresol.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Principal/Impresol.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Email/TemplateMail.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Datos/DAlmacen.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Principal/HiloAtencion.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Procesador/Token.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Procesador/Cinta.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Email/MailProducto.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Negocio/NAlmacen.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Presentador/Principal.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Email/MailTipoEntrega.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Datos/DAdministrativo.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Principal/HiloMail.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Negocio/NProveedor.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Datos/DTipoEntrega.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Email/MailAlmacen.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Negocio/NProducto.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/projectmail/ProjectMail.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Email/MailTipoProducto.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Negocio/NAdministrativo.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Procesador/Parser.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Procesador/TPC.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Negocio/NTipoEntrega.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Negocio/NCliente.java</file>
+            <file>file:/D:/UNIVERSIDAD/2019/I-2019/Tecnologia%20web/grupo02sc/ProjectMail/src/Email/MailProveedor.java</file>
         </group>
     </open-files>
 </project-private>

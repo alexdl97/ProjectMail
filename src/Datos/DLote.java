@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ADL
  */
 public class DLote {
-    
+
     private int id;
     private String codigo;
     private Date fecha_ingreso;
@@ -27,7 +27,7 @@ public class DLote {
     private int almacenid;
     private int proveedorid;
     private Conexion conexion;
-    
+
     public DLote() {
         id = 0;
         codigo = "";
@@ -48,7 +48,7 @@ public class DLote {
         this.almacenid = almacenid;
         this.proveedorid = proveedorid;
     }
-    
+
     public DLote(int id, String codigo, Date fecha_ingreso, int cantidad, String estado, int almacenid, int proveedorid) {
         this.id = id;
         this.codigo = codigo;
@@ -114,11 +114,14 @@ public class DLote {
     public void setProveedorid(int proveedorid) {
         this.proveedorid = proveedorid;
     }
-    
+
     public DefaultTableModel getLotes() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel lotes = new DefaultTableModel();
+        lotes.setColumnIdentifiers(new Object[]{
+            "id", "codigo", "fecha_ingreso", "cantidad", "estado", "almacenid", "proveedorid"
+        });
         String sql = "SELECT * FROM lote WHERE estado = 'A'";
         try {
             // La ejecuto
@@ -140,20 +143,20 @@ public class DLote {
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return lotes;
     }
-    
+
     public int registrar() {
-         // Abro y obtengo la conexion
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO lote(codigo, fecha_ingreso, cantidad, estado, almacenid, proveedorid) " +
-                      "VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO lote(codigo, fecha_ingreso, cantidad, estado, almacenid, proveedorid) "
+                + "VALUES(?, ?, ?, ?, ?, ?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -182,9 +185,9 @@ public class DLote {
         }
         return 0;
     }
-    
+
     public DefaultTableModel getLote() {
-        
+
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel lote = new DefaultTableModel();
@@ -196,10 +199,10 @@ public class DLote {
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
             stmt.setInt(1, this.id);
             ResultSet result = stmt.executeQuery();
-            
-             while (result.next()) {
+
+            while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                lote.addRow(new Object[] {
+                lote.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
                     result.getDate("fecha_ingreso"),
@@ -209,24 +212,23 @@ public class DLote {
                     result.getInt("proveedorid")
                 });
             }
-             
+
             // Cierro Conexion
             this.conexion.cerrarConexion();
 
             // Obtengo el id generado pra devolverlo
-           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return lote;
     }
-    
+
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "UPDATE lote SET codigo = ?, fecha_ingreso = ?, " +
-                "cantidad = ?, estado = ?, almacenid = ?, proveedorid = ? WHERE lote.id = ?";
+        String sql = "UPDATE lote SET codigo = ?, fecha_ingreso = ?, "
+                + "cantidad = ?, estado = ?, almacenid = ?, proveedorid = ? WHERE lote.id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -256,7 +258,7 @@ public class DLote {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
@@ -281,5 +283,5 @@ public class DLote {
         }
         return -1;
     }
-    
+
 }

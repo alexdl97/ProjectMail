@@ -133,9 +133,9 @@ public class MailTipoEntrega extends TemplateMail {
         try {
             //MimeMail mimemailer = new MimeMail();
             //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
-            SMTP.sendMail(destinatario, "OBTENER TIPO ENTREGA", "Lista de TIPO ENTREGA\n" + Tools.dibujarDatos(tipoEntrega.getTipoEntrega()));
+            SMTP.sendMail(destinatario, "OBTENERTIPOSENTREGAS", "Lista de TIPO ENTREGA\n" + Tools.dibujarDatos(tipoEntrega.getTipoEntrega()));
         } catch (Exception e) {
-            SMTP.sendMail(destinatario, "Mostrar tipo ENTREGA", "error durante la obtencion de la tabla, verifique con el comando HELP");
+            SMTP.sendMail(destinatario, "Mostrar tipo entrega", "error durante la obtencion de la tabla, verifique con el comando HELP");
 
         }
 

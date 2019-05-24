@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ADL
  */
 public class DNotaVenta {
+
     private int id;
     private String codigo;
     private Date fecha_emision;
@@ -25,7 +26,7 @@ public class DNotaVenta {
     private String estado;
     private int pedidoid;
     private Conexion conexion;
-    
+
     public DNotaVenta() {
         id = 0;
         codigo = "";
@@ -35,7 +36,7 @@ public class DNotaVenta {
         pedidoid = 0;
         conexion = Conexion.getInstancia();
     }
-    
+
     public DNotaVenta(String codigo, Date fecha_emision, double monto_total, String estado, int pedidoid) {
         this.id = 0;
         this.codigo = codigo;
@@ -101,11 +102,14 @@ public class DNotaVenta {
     public void setPedidoid(int pedidoid) {
         this.pedidoid = pedidoid;
     }
-    
+
     public DefaultTableModel getNotasVentas() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
-        DefaultTableModel lotes = new DefaultTableModel();
+        DefaultTableModel notasVentas = new DefaultTableModel();
+        notasVentas.setColumnIdentifiers(new Object[]{
+            "id", "codigo", "fecha_emision", "monto_total", "estado", "pedidoid"
+        });
         String sql = "SELECT * FROM notaventa WHERE estado = 'A'";
         try {
             // La ejecuto
@@ -115,7 +119,7 @@ public class DNotaVenta {
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                lotes.addRow(new Object[]{
+                notasVentas.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
                     result.getDate("fecha_emision"),
@@ -126,20 +130,20 @@ public class DNotaVenta {
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return lotes;
+        return notasVentas;
     }
-    
+
     public int registrar() {
-         // Abro y obtengo la conexion
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO notaventa(codigo, fecha_emision, monto_total, estado, pedidoid) " +
-                      "VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO notaventa(codigo, fecha_emision, monto_total, estado, pedidoid) "
+                + "VALUES(?, ?, ?, ?, ?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -167,9 +171,9 @@ public class DNotaVenta {
         }
         return 0;
     }
-    
+
     public DefaultTableModel getNotaVenta() {
-        
+
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel lote = new DefaultTableModel();
@@ -181,10 +185,10 @@ public class DNotaVenta {
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
             stmt.setInt(1, this.id);
             ResultSet result = stmt.executeQuery();
-            
-             while (result.next()) {
+
+            while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                lote.addRow(new Object[] {
+                lote.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
                     result.getDate("fecha_emision"),
@@ -193,24 +197,23 @@ public class DNotaVenta {
                     result.getInt("pedidoid")
                 });
             }
-             
+
             // Cierro Conexion
             this.conexion.cerrarConexion();
 
             // Obtengo el id generado pra devolverlo
-           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return lote;
     }
-    
+
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "UPDATE notaventa SET codigo = ?, fecha_emision = ?, monto_total = ?, " +
-                "estado = ?, pedidoid = ? WHERE id = ?";
+        String sql = "UPDATE notaventa SET codigo = ?, fecha_emision = ?, monto_total = ?, "
+                + "estado = ?, pedidoid = ? WHERE id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -239,7 +242,7 @@ public class DNotaVenta {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
@@ -264,5 +267,5 @@ public class DNotaVenta {
         }
         return -1;
     }
-    
+
 }

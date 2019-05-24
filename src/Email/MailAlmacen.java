@@ -133,7 +133,7 @@ public class MailAlmacen extends TemplateMail{
         try {
             //MimeMail mimemailer = new MimeMail();
             //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
-            SMTP.sendMail(destinatario, "OBTENER ALMACEN", "Lista de TIPO PRODUCTO\n" + Tools.dibujarDatos(almacen.getAlmacenes()));
+            SMTP.sendMail(destinatario, "OBTENERALMACENES", "Lista de TIPO PRODUCTO\n" + Tools.dibujarDatos(almacen.getAlmacenes()));
         } catch (Exception e) {
             SMTP.sendMail(destinatario, "Mostrar almacenes", "error durante la obtencion de la tabla, verifique con el comando HELP");
 

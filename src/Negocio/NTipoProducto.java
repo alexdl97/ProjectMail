@@ -18,8 +18,8 @@ public class NTipoProducto {
         tipoProducto = new DTipoProducto();
     }
     
-    public DefaultTableModel getTipoProducto() {
-        return tipoProducto.getTipoProducto();
+    public DefaultTableModel getTiposProductos() {
+        return tipoProducto.getTiposProductos();
     }
     
     public int registrar(String descripcion) {

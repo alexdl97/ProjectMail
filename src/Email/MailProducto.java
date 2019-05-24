@@ -126,7 +126,7 @@ public class MailProducto extends TemplateMail{
         try {
             //MimeMail mimemailer = new MimeMail();
             //mimemailer.sendHtmlEmail(correoDest, "Mostrar Clientes", "Lista de Clientes\n" + Tools.dibujarTablawithHTMLwithoutOpciones(cliente.getClientes()));            
-            SMTP.sendMail(destinatario, "OBTENER PRODUCTOS", "Lista de productos\n" + Tools.dibujarDatos(producto.getProductos()));
+            SMTP.sendMail(destinatario, "OBTENERPRODUCTOS", "Lista de productos\n" + Tools.dibujarDatos(producto.getProductos()));
         } catch (Exception e) {
             SMTP.sendMail(destinatario, "Mostrar Productos", "error durante la obtencion de la tabla, verifique con el comando HELP");
 

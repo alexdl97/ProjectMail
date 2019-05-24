@@ -108,6 +108,9 @@ public class DProveedor {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel proveedores = new DefaultTableModel();
+             proveedores.setColumnIdentifiers(new Object[]{
+            "id", "codigo","nombre", "telefono","direccion" ,"estado"
+        });
         String sql = "SELECT * FROM proveedor WHERE estado = 'A'";
         try {
             // La ejecuto

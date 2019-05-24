@@ -86,14 +86,14 @@ public class TPC {
             new Token(Token.FUNC, Token.ELIMINARPRODUCTO, "ELIMINARPRODUCTO"),
             
             new Token(Token.FUNC, Token.OBTENERTIPOSENTREGAS, "OBTENERTIPOSENTREGAS"),
-            new Token(Token.FUNC, Token.REGISTRARPRODUCTO, "REGISTRARTIPOENTREGA"),
-            new Token(Token.FUNC, Token.MODIFICARPRODUCTO, "MODIFICARTIPOENTREGA"),
-            new Token(Token.FUNC, Token.ELIMINARPRODUCTO, "ELIMINARTIPOENTREGA"),
+            new Token(Token.FUNC, Token.REGISTRARTIPOPRODUCTO, "REGISTRARTIPOENTREGA"),
+            new Token(Token.FUNC, Token.MODIFICARTIPOPRODUCTO, "MODIFICARTIPOENTREGA"),
+            new Token(Token.FUNC, Token.ELIMINARTIPOPRODUCTO, "ELIMINARTIPOENTREGA"),
             
-            new Token(Token.FUNC, Token.OBTENERPRODUCTOS, "OBTENERALMACENES"),
-            new Token(Token.FUNC, Token.REGISTRARPRODUCTO, "REGISTRARALMACENES"),
-            new Token(Token.FUNC, Token.MODIFICARPRODUCTO, "MODIFICARALMACENES"),
-            new Token(Token.FUNC, Token.ELIMINARPRODUCTO, "ELIMINARALMACENES")
+            new Token(Token.FUNC, Token.OBTENERALMACENES, "OBTENERALMACENES"),
+            new Token(Token.FUNC, Token.REGISTRARALMACEN, "REGISTRARALMACEN"),
+            new Token(Token.FUNC, Token.MODIFICARALMACEN, "MODIFICARALMACEN"),
+            new Token(Token.FUNC, Token.ELIMINARALMACEN, "ELIMINARALMACEN")
     ));
 
     public static Token estaEnTPC(String lexema) {

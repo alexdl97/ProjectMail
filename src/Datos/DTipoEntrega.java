@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Junior Guzman
  */
 public class DTipoEntrega {
-    
+
     private int id;
     private String descripcion;
     private Conexion conexion;
@@ -67,11 +67,14 @@ public class DTipoEntrega {
         this.descripcion = descripcion;
         conexion = Conexion.getInstancia();
     }
-    
-     public DefaultTableModel getTipoEntrega() {
+
+    public DefaultTableModel getTipoEntrega() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
-        DefaultTableModel proveedores = new DefaultTableModel();
+        DefaultTableModel tiposEntregas = new DefaultTableModel();
+        tiposEntregas.setColumnIdentifiers(new Object[]{
+            "id", "descripcion"
+        });
         String sql = "SELECT * FROM TipoEntrega";
         try {
             // La ejecuto
@@ -81,26 +84,26 @@ public class DTipoEntrega {
             ResultSet result = stmt.executeQuery();
             while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                proveedores.addRow(new Object[]{
+                tiposEntregas.addRow(new Object[]{
                     result.getInt("id"),
-                    result.getString("descripcion"),
-                });
+                    result.getString("descripcion"),});
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return proveedores;
+        return tiposEntregas;
     }
-     public int registrar() {
-         // Abro y obtengo la conexion
+
+    public int registrar() {
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO TipoEntrega(descripcion) " +
-                      "VALUES(?)";
+        String sql = "INSERT INTO TipoEntrega(descripcion) "
+                + "VALUES(?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -124,9 +127,9 @@ public class DTipoEntrega {
         }
         return 0;
     }
-    
+
     public DefaultTableModel getTipoEntregas() {
-        
+
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel tipoEntrega = new DefaultTableModel();
@@ -138,27 +141,25 @@ public class DTipoEntrega {
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
             stmt.setInt(1, this.id);
             ResultSet result = stmt.executeQuery();
-            
-             while (result.next()) {
+
+            while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                 System.out.println("Descripcion --> " + result.getString("descripcion"));
-                tipoEntrega.addRow(new Object[] {
+                System.out.println("Descripcion --> " + result.getString("descripcion"));
+                tipoEntrega.addRow(new Object[]{
                     result.getInt("id"),
-                    result.getString("descripcion"),
-                });
+                    result.getString("descripcion"),});
             }
-             
+
             // Cierro Conexion
             this.conexion.cerrarConexion();
 
             // Obtengo el id generado pra devolverlo
-           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return tipoEntrega;
     }
-    
+
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
@@ -188,7 +189,7 @@ public class DTipoEntrega {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
@@ -212,5 +213,5 @@ public class DTipoEntrega {
             System.out.println(ex.getMessage());
         }
         return -1;
-    } 
+    }
 }

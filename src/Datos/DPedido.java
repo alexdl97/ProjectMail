@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author ADL
  */
 public class DPedido {
-    
+
     private int id;
     private String codigo;
     private Date fecha_registro;
@@ -27,7 +27,7 @@ public class DPedido {
     private double monto_total;
     private int clienteid;
     private Conexion conexion;
-    
+
     public DPedido() {
         id = 0;
         codigo = "";
@@ -48,7 +48,7 @@ public class DPedido {
         this.monto_total = monto_total;
         this.clienteid = clienteid;
     }
-    
+
     public DPedido(int id, String codigo, Date fecha_registro, String descripcion, String estado, double monto_total, int clienteid) {
         this.id = id;
         this.codigo = codigo;
@@ -114,11 +114,14 @@ public class DPedido {
     public void setClienteid(int clienteid) {
         this.clienteid = clienteid;
     }
-    
+
     public DefaultTableModel getPedidos() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel pedidos = new DefaultTableModel();
+        pedidos.setColumnIdentifiers(new Object[]{
+            "id", "codigo", "fecha_registro", "descripcion", "estado", "monto_total", "clienteid"
+        });
         String sql = "SELECT * FROM proveedor WHERE estado = 'A'";
         try {
             // La ejecuto
@@ -140,20 +143,20 @@ public class DPedido {
             }
             // Cierro Conexion
             this.conexion.cerrarConexion();
-            
+
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return pedidos;
     }
-    
+
     public int registrar() {
-         // Abro y obtengo la conexion
+        // Abro y obtengo la conexion
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO pedido(codigo, fecha_registro, descripcion, estado, monto_total, clienteid) " +
-                      "VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO pedido(codigo, fecha_registro, descripcion, estado, monto_total, clienteid) "
+                + "VALUES(?, ?, ?, ?, ?)";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -182,9 +185,9 @@ public class DPedido {
         }
         return 0;
     }
-    
+
     public DefaultTableModel getPedido() {
-        
+
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
         DefaultTableModel pedido = new DefaultTableModel();
@@ -196,10 +199,10 @@ public class DPedido {
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
             stmt.setInt(1, this.id);
             ResultSet result = stmt.executeQuery();
-            
-             while (result.next()) {
+
+            while (result.next()) {
                 // Agrego las tuplas a mi tabla
-                pedido.addRow(new Object[] {
+                pedido.addRow(new Object[]{
                     result.getInt("id"),
                     result.getString("codigo"),
                     result.getString("fecha_registro"),
@@ -209,24 +212,23 @@ public class DPedido {
                     result.getInt("clienteid")
                 });
             }
-             
+
             // Cierro Conexion
             this.conexion.cerrarConexion();
 
             // Obtengo el id generado pra devolverlo
-           
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         return pedido;
     }
-    
+
     public int modificar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "UPDATE pedido SET codigo = ?, fecha_registro = ?, " +
-                "descripcion = ?, estado = ?, monto_total = ?, clienteid = ? WHERE pedido.id = ?";
+        String sql = "UPDATE pedido SET codigo = ?, fecha_registro = ?, "
+                + "descripcion = ?, estado = ?, monto_total = ?, clienteid = ? WHERE pedido.id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -256,7 +258,7 @@ public class DPedido {
         }
         return 0;
     }
-    
+
     public int eliminar() {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
@@ -281,5 +283,5 @@ public class DPedido {
         }
         return -1;
     }
-    
+
 }
