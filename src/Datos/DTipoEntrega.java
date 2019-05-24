@@ -102,7 +102,7 @@ public class DTipoEntrega {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "INSERT INTO TipoEntrega(descripcion) "
+        String sql = "INSERT INTO tipoentrega(descripcion) "
                 + "VALUES(?)";
         try {
             // La ejecuto
@@ -164,14 +164,14 @@ public class DTipoEntrega {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "UPDATE TipoEntrega SET descripcion = ? WHERE TipoEntrega.id = ?";
+        String sql = "UPDATE tipoentrega SET descripcion = ? WHERE id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             // El segundo parametro de usa cuando se tienen tablas que generan llaves primarias
             // es bueno cuando nuestra bd tiene las primarias autoincrementables
+            stmt.setInt(2, this.id);
             stmt.setString(1, this.descripcion);
-            stmt.setInt(6, this.id);
             int rows = stmt.executeUpdate();
 
             // Cierro Conexion
@@ -194,7 +194,7 @@ public class DTipoEntrega {
         this.conexion.abrirConexion();
         Connection con = this.conexion.getConexion();
 
-        String sql = "DELETE FROM TipoEntrega WHERE TipoEntrega.id = ?";
+        String sql = "DELETE FROM TipoEntrega WHERE id = ?";
         try {
             // La ejecuto
             PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);

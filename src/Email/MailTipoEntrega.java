@@ -46,7 +46,7 @@ public class MailTipoEntrega extends TemplateMail {
             tipoEntrega.registrar(descripcion);
             //mimeMail mimemailer = new mimeMail();            
             //mimemailer.sendHtmlEmail(correoDest, "Registrar Cliente", Constante.IngresoPositivoR+"\n\n"+ Herramientas.dibujarTablawithHTMLwithoutOpciones(clienteNegocio.mostrarClientes()));                   
-            System.out.println("SUPUESTAMENTE REGISTRO");
+            System.out.println("SE REGISTRO EL TIPO DE ENTREGA");
         } catch (Exception e) {
             //SMTP.sendMail(correoDest, "Registrar Cliente", Constantes.IngresoErrorR+"\n"+"Mensaje enviado: "+ analex.M.texto);
             SMTP.sendMail(destinatario, "Registrar TIPO DE ENTREGA", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);
@@ -78,7 +78,7 @@ public class MailTipoEntrega extends TemplateMail {
             analex.Avanzar();
             String descripcion = Tools.quitarComillas(analex.Preanalisis().getToStr());
             tipoEntrega.modificar(id, descripcion);
-            System.out.println("SUPUESTAMENTE ACTUALIZDO");
+            System.out.println("TIPO DE ENTREGA ACTUALIZADO");
         } catch (Exception e) {
             //SMTP.sendMail(correoDest, "Registrar Cliente", Constantes.IngresoErrorR+"\n"+"Mensaje enviado: "+ analex.M.texto);
             SMTP.sendMail(destinatario, "Actualizar tipo de entrega", "ERROR XD" + "\n" + "Mensaje enviado: " + analex.M.texto);

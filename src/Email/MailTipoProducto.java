@@ -28,7 +28,6 @@ public class MailTipoProducto extends TemplateMail {
        // Obtengo el Siguiente token
         analex.Avanzar();
         Token token = analex.Preanalisis();
-
         // Reviso si no es ayuda
         if (token.getNombre() == Token.HELP) {
             // Mostrar ayuda de esa funcionalidad
@@ -43,6 +42,7 @@ public class MailTipoProducto extends TemplateMail {
             analex.Avanzar();
             // Atributos      
             String descripcion = Tools.quitarComillas(analex.Preanalisis().getToStr());
+            System.out.println("el valor enviando: " + descripcion);
             tipoProducto.registrar(descripcion);
             //mimeMail mimemailer = new mimeMail();            
             //mimemailer.sendHtmlEmail(correoDest, "Registrar Cliente", Constante.IngresoPositivoR+"\n\n"+ Herramientas.dibujarTablawithHTMLwithoutOpciones(clienteNegocio.mostrarClientes()));                   

@@ -86,9 +86,9 @@ public class TPC {
             new Token(Token.FUNC, Token.ELIMINARPRODUCTO, "ELIMINARPRODUCTO"),
             
             new Token(Token.FUNC, Token.OBTENERTIPOSENTREGAS, "OBTENERTIPOSENTREGAS"),
-            new Token(Token.FUNC, Token.REGISTRARTIPOPRODUCTO, "REGISTRARTIPOENTREGA"),
-            new Token(Token.FUNC, Token.MODIFICARTIPOPRODUCTO, "MODIFICARTIPOENTREGA"),
-            new Token(Token.FUNC, Token.ELIMINARTIPOPRODUCTO, "ELIMINARTIPOENTREGA"),
+            new Token(Token.FUNC, Token.REGISTRARTIPOENTREGA, "REGISTRARTIPOENTREGA"),
+            new Token(Token.FUNC, Token.MODIFICARTIPOENTREGA, "MODIFICARTIPOENTREGA"),
+            new Token(Token.FUNC, Token.ELIMINARTIPOENTREGA, "ELIMINARTIPOENTREGA"),
             
             new Token(Token.FUNC, Token.OBTENERALMACENES, "OBTENERALMACENES"),
             new Token(Token.FUNC, Token.REGISTRARALMACEN, "REGISTRARALMACEN"),

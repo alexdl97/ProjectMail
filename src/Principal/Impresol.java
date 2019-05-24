@@ -114,7 +114,7 @@ public class Impresol {
                 this.mail_tipo_producto.listar(analex, destinatario);
                 break;
             case Token.REGISTRARTIPOPRODUCTO:
-                this.mail_tipo_producto.modificar(analex, destinatario);
+                this.mail_tipo_producto.registrar(analex, destinatario);
                 break;
             case Token.MODIFICARTIPOPRODUCTO:
                 this.mail_tipo_producto.modificar(analex, destinatario);
@@ -132,7 +132,7 @@ public class Impresol {
             case Token.MODIFICARTIPOENTREGA:
                 this.mail_tipo_entrega.modificar(analex, destinatario);
                 break;
-            case Token.ELIMINARPTIPOENTREGA:
+            case Token.ELIMINARTIPOENTREGA:
                 this.mail_tipo_entrega.eliminar(analex, destinatario);
                 break;
 
